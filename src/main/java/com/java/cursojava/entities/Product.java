@@ -9,8 +9,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "tb_product")
@@ -29,7 +31,9 @@ public class Product implements Serializable {
 	//TODO: Association with Order
 	//Grants that the product won't have a repeated category and doesn't start null, but empty
 	//Reminder: Set is an Interface, so it can't be instantiated
-	@Transient
+	//Creates Association Table using Foreign Keys from Product and Category. Since we're in the Product Entity, the "inverse" is category.
+	@ManyToMany
+	@JoinTable(name = "tb_product_category", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
 	private Set<Category> categories = new HashSet<>();
 	
 	public Product()
