@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.java.cursojava.entities.Category;
 import com.java.cursojava.entities.Order;
+import com.java.cursojava.entities.OrderItem;
 import com.java.cursojava.entities.Product;
 import com.java.cursojava.entities.User;
 import com.java.cursojava.entities.enums.OrderStatus;
 import com.java.cursojava.repositories.CategoryRepository;
+import com.java.cursojava.repositories.OrderItemRepository;
 import com.java.cursojava.repositories.OrderRepository;
 import com.java.cursojava.repositories.ProductRepository;
 import com.java.cursojava.repositories.UserRepository;
@@ -36,6 +38,9 @@ public class TestConfig implements CommandLineRunner {
 	
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	private OrderItemRepository orderItemRepository;
 
 	// Execute when application is initialized
 	@Override
@@ -59,6 +64,11 @@ public class TestConfig implements CommandLineRunner {
 		Order o2 = new Order(null, Instant.parse("2019-07-21T03:42:10Z"), OrderStatus.CANCELED, u2);
 		Order o3 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"), OrderStatus.SHIPPED, u1);
 		
+		OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+		OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
+		OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
+		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
+		
 		//Saves in DB
 		categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
 		productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
@@ -75,6 +85,7 @@ public class TestConfig implements CommandLineRunner {
 		productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
 		userRepository.saveAll(Arrays.asList(u1, u2));
 		orderRepository.saveAll(Arrays.asList(o1, o2, o3));
+		orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
 	}
 
 }

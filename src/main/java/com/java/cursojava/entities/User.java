@@ -30,7 +30,7 @@ public class User implements Serializable {
 	private String password;
 	
 	//Association
-	@JsonIgnore	//Prevents overflow
+	@JsonIgnore	//Prevents overflow with two-way association
 	@OneToMany(mappedBy = "client")	//As written in Order Entity
 	private List<Order> orders = new ArrayList<>();
 	
