@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Profile;
 import com.java.cursojava.entities.Category;
 import com.java.cursojava.entities.Order;
 import com.java.cursojava.entities.OrderItem;
+import com.java.cursojava.entities.Payment;
 import com.java.cursojava.entities.Product;
 import com.java.cursojava.entities.User;
 import com.java.cursojava.entities.enums.OrderStatus;
@@ -86,6 +87,11 @@ public class TestConfig implements CommandLineRunner {
 		userRepository.saveAll(Arrays.asList(u1, u2));
 		orderRepository.saveAll(Arrays.asList(o1, o2, o3));
 		orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
+		
+		Payment pay1 = new Payment(null, Instant.parse("2019-06-20T21:53:07Z"), o1);
+		//To save the dependable object in an One-To-One relation, use Set Method
+		o1.setPayment(pay1);
+		orderRepository.save(o1);
 	}
 
 }
