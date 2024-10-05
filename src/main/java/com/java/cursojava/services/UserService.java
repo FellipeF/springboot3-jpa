@@ -37,4 +37,17 @@ public class UserService {
 	{
 		repository.deleteById(id);
 	}
+	
+	public User update(Long id, User u)
+	{
+		User monitoredEntity = repository.getReferenceById(id);	//Prepares an object instead of searching it directly in the DB, like the findById method
+		updateData(monitoredEntity, u);
+		return repository.save(monitoredEntity);
+	}
+
+	private void updateData(User monitoredEntity, User u) {
+		monitoredEntity.setName(u.getName());
+		monitoredEntity.setEmail(u.getEmail());
+		monitoredEntity.setPhone(u.getPhone());
+	}
 }
