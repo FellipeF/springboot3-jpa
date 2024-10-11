@@ -4,6 +4,8 @@ This Spring Boot and JPA/Hibernate Project implements a store. You can learn mor
 
 ![image](https://github.com/user-attachments/assets/a6eb64ab-cc9d-4372-b21a-f854eccf1308)
 
+When initialized, the test database will be automatically be populated with the parameters from `TestConfig.java` located in the `config` folder. Its configuration is located in the `resources`folder.
+
 ## Study Topics
 
 - 🚀 **Creation of a Spring Boot 3 Java Project**
